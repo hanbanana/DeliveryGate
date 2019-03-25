@@ -33,8 +33,9 @@
 
       </tr>
     </thead>
-    {{#each deliveryOrder}}
+    
     <tbody>
+      {{#each deliveryOrder}}
       <tr>
         <td>{{this.id}}</td>
         <td>{{this.BL}}</td>
@@ -49,12 +50,12 @@
         <td>{{this.Return_}}</td>
         <td>{{this.Close_}}</td>
         <td><button data-planid="{{this.id}}" class="delplan">Delete</button></td>
-
+{{/each}}
 
       </tr>
 
     </tbody>
-    {{/each}}
+    
   </table>
 
 </div>
@@ -93,6 +94,7 @@
 </form>
 
 <script type="text/javascript">
+
   $(".delplan").on("click", function (event) {
     var id = $(this).data("planid");
 
