@@ -1,10 +1,73 @@
+<table data-toggle="table" data-url="data1.json" data-pagination="true" data-search="true">
+  <thead>
+    <tr>
+      <th data-sortable="true" data-field="id">Item ID</th>
+      <th data-field="name">Item Name</th>
+      <th data-field="price">Item Price</th>
+    </tr>
+  </thead>
+</table>
+
+
+
+<div style="margin-left: 200px; margin-right: 200px">
+  <table class="table table-sm table-hover" data-toggle="table"  data-search="true">
+    
+    <thead>
+      <tr>
+        <th scope="col" data-sortable="true">ID#</th>
+        <th scope="col">B/L</th>
+        <th scope="col">Terminal Name</th>
+        <th scope="col">Container No.</th>
+        <th scope="col">Vassel No.</th>
+        <th scope="col">ETA</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Seal No.</th>
+        <th scope="col">Delivery Location</th>
+        <th scope="col">Status</th>
+        <th scope="col">Return</th>
+        <th scope="col">Close</th>
+        <th scope="col">Delete</th>
+
+
+
+      </tr>
+    </thead>
+    {{#each deliveryOrder}}
+    <tbody>
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.BL}}</td>
+        <td>{{this.Terminal_Name}}</td>
+        <td>{{this.Container_No}}</td>
+        <td>{{this.Vassel_No}}</td>
+        <td>{{this.ETA}}</td>
+        <td>{{this.Weight}}</td>
+        <td>{{this.Seal_No}}</td>
+        <td>{{this.Delivery_Location}}</td>
+        <td>{{this.Status_}}</td>
+        <td>{{this.Return_}}</td>
+        <td>{{this.Close_}}</td>
+        <td><button data-planid="{{this.id}}" class="delplan">Delete</button></td>
+
+
+      </tr>
+
+    </tbody>
+    {{/each}}
+  </table>
+
+</div>
+
+
+
 <h1>Day Planner</h1>
 
 <ul>
-  {{#each plans}}
+  {{#each deliveryOrder}}
   <li>
     <p>
-      {{this.id}}. {{this.plan}}
+      {{this.id}}. {{this.BL}}
 
       <button data-planid="{{this.id}}" class="delplan">Delete Plan!</button>
     </p>
@@ -14,30 +77,30 @@
 
 <h2>Create a Plan</h2>
 <form id="createplan" class="button-size">
-  <textarea type="text" name="plan"></textarea>
+  <textarea type="text" name="ETA"></textarea>
   <button type="submit">Save Plan!</button>
 </form>
 
 <h2>Update a Plan</h2>
 <form id="updateplan" class="button-size">
   <select name="id">
-		{{#each plans}}
-			<option value="{{this.id}}">{{this.plan}}</option>
-		{{/each}}
-	</select>
-  <textarea type="text" name="plan" placeholder="plan"></textarea>
+    {{#each plans}}
+    <option value="{{this.id}}">{{this.BL}}</option>
+    {{/each}}
+  </select>
+  <textarea type="text" name="BL" placeholder="BL"></textarea>
   <button type="submit">Update Plan!</button>
 </form>
 
 <script type="text/javascript">
-  $(".delplan").on("click", function(event) {
+  $(".delplan").on("click", function (event) {
     var id = $(this).data("planid");
 
     // Send the DELETE request.
     $.ajax("/todos/" + id, {
       type: "DELETE"
     }).then(
-      function() {
+      function () {
         console.log("deleted id ", id);
         // Reload the page to get the updated list
         location.reload();
@@ -45,12 +108,12 @@
     );
   });
 
-  $("#createplan").on("submit", function(event) {
+  $("#createplan").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
     var newPlan = {
-      plan: $("#createplan [name=plan]").val().trim()
+      ETA: $("#createplan [name=ETA]").val().trim()
     };
 
     // Send the POST request.
@@ -58,7 +121,7 @@
       type: "POST",
       data: newPlan
     }).then(
-      function() {
+      function () {
         console.log("created new plan");
         // Reload the page to get the updated list
         location.reload();
@@ -66,14 +129,14 @@
     );
   });
 
-  $("#updateplan").on("submit", function(event) {
+  $("#updateplan").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
     var id = $("[name=id]").val().trim();
 
     var updatedPlan = {
-      plan: $("#updateplan [name=plan]").val().trim()
+      plan: $("#updateplan [name=BL]").val().trim()
     };
 
     // Send the PUT request.
@@ -81,11 +144,13 @@
       type: "PUT",
       data: updatedPlan
     }).then(
-      function() {
+      function () {
         console.log("updated id ", id);
         // Reload the page to get the updated list
         location.reload();
       }
     );
   });
+
+
 </script>

@@ -22,7 +22,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "root",
-  database: "day_planner_db"
+  database: "hrx_delivery"
 });
 
 connection.connect(function(err) {
@@ -36,18 +36,18 @@ connection.connect(function(err) {
 
 // Use Handlebars to render the main index.html page with the todos in it.
 app.get("/", function(req, res) {
-  connection.query("SELECT * FROM plans;", function(err, data) {
+  connection.query("SELECT * FROM deliveryOrder;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
 
-    res.render("index", { plans: data });
+    res.render("index", { deliveryOrder: data });
   });
 });
 
 // Create a new todo
 app.post("/todos", function(req, res) {
-  connection.query("INSERT INTO plans (plan) VALUES (?)", [req.body.plan], function(err, result) {
+  connection.query("INSERT INTO deliveryOrder (ETA) VALUES (?)", [req.body.ETA], function(err, result) {
     if (err) {
       return res.status(500).end();
     }
@@ -60,7 +60,7 @@ app.post("/todos", function(req, res) {
 
 // Retrieve all todos
 app.get("/todos", function(req, res) {
-  connection.query("SELECT * FROM plans;", function(err, data) {
+  connection.query("SELECT * FROM deliveryOrder;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
@@ -71,7 +71,7 @@ app.get("/todos", function(req, res) {
 
 // Update a todo
 app.put("/todos/:id", function(req, res) {
-  connection.query("UPDATE plans SET plan = ? WHERE id = ?", [req.body.plan, req.params.id], function(err, result) {
+  connection.query("UPDATE deliveryOrder SET BL = ? WHERE id = ?", [req.body.BL, req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();
@@ -87,7 +87,7 @@ app.put("/todos/:id", function(req, res) {
 
 // Delete a todo
 app.delete("/todos/:id", function(req, res) {
-  connection.query("DELETE FROM plans WHERE id = ?", [req.params.id], function(err, result) {
+  connection.query("DELETE FROM deliveryOrder WHERE id = ?", [req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();

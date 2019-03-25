@@ -1,26 +1,23 @@
-/*
-
-To run this file, we do the following in our Terminal:
-
-1. Go to the directory of this sql file.
-
-2. Get into our mysql console.
-
-3. Run "source schema.sql"
-
-*/
-
--- Create the database day_planner_db and specified it for use.
-CREATE DATABASE day_planner_db;
-USE day_planner_db;
+DROP DATABASE IF EXISTS HRX_Delivery;
+CREATE DATABASE HRX_Delivery;
+USE HRX_Delivery;
 
 -- Create the table plans.
-CREATE TABLE plans
+CREATE TABLE DeliveryOrder
 (
 id int NOT NULL AUTO_INCREMENT,
-plan varchar(255) NOT NULL,
+BL varchar(255) NOT NULL,
+Terminal_Name VARCHAR(50) NOT NULL,
+Vassel_No varchar(255) NOT NULL,
+ETA VARCHAR(50) NOT NULL,
+Weight varchar(255) NOT NULL,
+Seal_No VARCHAR(50) NOT NULL,
+Delivery_Location varchar(255) NOT NULL,
+Status_ VARCHAR(50) NOT NULL,
+Return_ varchar(255) NOT NULL,
+Close_ VARCHAR(50) NOT NULL,
 PRIMARY KEY (id)
 );
 
 -- Insert a set of records.
-INSERT INTO plans (plan) VALUES ('Plan to fight a ninja.');
+INSERT INTO DeliveryOrder (BL) VALUES ('TEST1234');

@@ -1,0 +1,27 @@
+{
+  "name": "hrx_gate",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000D\u0000e\u0000l\u0000i\u0000v\u0000e\u0000r\u0000y\u0000G\u0000a\u0000t\u0000e\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanbanana/DeliveryGate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanbanana/DeliveryGate/issues"
+  },
+  "homepage": "https://github.com/hanbanana/DeliveryGate#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap-table": "^1.14.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "mysql": "^2.16.0"
+  }
+}
