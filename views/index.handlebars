@@ -1,13 +1,3 @@
-<table data-toggle="table" data-url="data1.json" data-pagination="true" data-search="true">
-  <thead>
-    <tr>
-      <th data-sortable="true" data-field="id">Item ID</th>
-      <th data-field="name">Item Name</th>
-      <th data-field="price">Item Price</th>
-    </tr>
-  </thead>
-</table>
-
 
 
 <div style="margin-left: 200px; margin-right: 200px">
@@ -61,8 +51,8 @@
 </div>
 
 
-
-<h1>Day Planner</h1>
+<br>
+<h1>Delivery Order</h1>
 
 <ul>
   {{#each deliveryOrder}}
@@ -78,9 +68,55 @@
 
 <h2>Create a Plan</h2>
 <form id="createplan" class="button-size">
+  <textarea type="text" name="BL" id="BL"></textarea>
+  <textarea type="text" name="Terminal_Name" id="Terminal_Name"></textarea>
+  <textarea type="text" name="Container_No" id="Container_No"></textarea>
+  <textarea type="text" name="Vassel_No" id="Vassel_No"></textarea>
+  <textarea type="text" name="ETA" id="ETA"></textarea>
+  <textarea type="text" name="Weight" id="Weight"></textarea>
+  <textarea type="text" name="Seal_No" id="Seal_No"></textarea>
+  <textarea type="text" name="Delivery_Location" id="Delivery_Location"></textarea>
+  <textarea type="text" name="Status_" id="Status_"></textarea>
+  <textarea type="text" name="Return_" id="Return_"></textarea>
+  <textarea type="text" name="Close_" id="Close_"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+{{!-- <form id="createplan" class="button-size">
+  <textarea type="text" name="Terminal_Name"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Vassel_No"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
   <textarea type="text" name="ETA"></textarea>
   <button type="submit">Save Plan!</button>
 </form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Weight"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Seal_No"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Delivery_Location"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Status_"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Return_"></textarea>
+  <button type="submit">Save Plan!</button>
+</form>
+<form id="createplan" class="button-size">
+  <textarea type="text" name="Close_"></textarea>
+  <button type="submit">Save Plan!</button>
+</form> --}}
 
 <h2>Update a Plan</h2>
 <form id="updateplan" class="button-size">
@@ -115,7 +151,17 @@
     event.preventDefault();
 
     var newPlan = {
-      ETA: $("#createplan [name=ETA]").val().trim()
+      BL: $("#BL").val().trim(),
+      Terminal_Name: $("#Terminal_Name").val().trim(),
+      Container_No: $("#Container_No").val().trim(),      
+      Vassel_No: $("#Vassel_No").val().trim(),
+      ETA: $("#ETA").val().trim(),
+      Weight: $("#Weight").val().trim(),
+      Seal_No: $("#Seal_No").val().trim(),
+      Delivery_Location: $("#Delivery_Location").val().trim(),
+      Status_: $("#Status_").val().trim(),
+      Return_: $("#Return_").val().trim(),
+      Close_: $("#Close_").val().trim()
     };
 
     // Send the POST request.

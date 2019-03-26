@@ -47,7 +47,8 @@ app.get("/", function(req, res) {
 
 // Create a new todo
 app.post("/todos", function(req, res) {
-  connection.query("INSERT INTO deliveryOrder (ETA) VALUES (?)", [req.body.ETA], function(err, result) {
+  connection.query("INSERT INTO deliveryOrder (BL, Terminal_Name, Container_No, Vassel_No, ETA, Weight, Seal_No, Delivery_Location, Status_, Return_, Close_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+  [req.body.BL, req.body.Terminal_Name, req.body.Container_No, req.body.Vassel_No, req.body.ETA, req.body.Weight, req.body.Seal_No, req.body.Delivery_Location, req.body.Status_, req.body.Return_, req.body.Close_], function(err, result) {
     if (err) {
       return res.status(500).end();
     }
