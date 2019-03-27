@@ -1,4 +1,94 @@
-<div style="margin-left: 200px; margin-right: 200px">
+<div class="container body-content">
+  <div class="page-header">
+    <label class="heading">History</label>
+    <div class="form-group">
+      <fieldset>
+        <form action="" class="form-group" method="post">
+
+
+          <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th scope="col" data-sortable="true">ID#</th>
+                <th scope="col">B/L</th>
+                <th scope="col">Terminal Name</th>
+                <th scope="col">Container No.</th>
+                <th scope="col">Vassel No.</th>
+                <th scope="col">ETA</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Seal No.</th>
+                <th scope="col">Delivery Location</th>
+                <th scope="col">Status</th>
+                <th scope="col">Return</th>
+                <th scope="col">Close</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {{#each deliveryOrder}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.BL}}</td>
+                <td>{{this.Terminal_Name}}</td>
+                <td>{{this.Container_No}}</td>
+                <td>{{this.Vassel_No}}</td>
+                <td>{{this.ETA}}</td>
+                <td>{{this.Weight}}</td>
+                <td>{{this.Seal_No}}</td>
+                <td>{{this.Delivery_Location}}</td>
+                <td>{{this.Status_}}</td>
+                <td>{{this.Return_}}</td>
+                <td>{{this.Close_}}</td>
+                <td><button data-planid="{{this.id}}" class="delplan">Delete</button></td>
+              </tr>
+              {{/each}}
+            </tbody>
+
+          </table>
+
+
+        </form>
+        <!--END OF FORM ^^-->
+      </fieldset>
+    </div>
+    <hr />
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- <div style="margin-left: 200px; margin-right: 200px">
   <table class="table table-sm table-hover" data-toggle="table" data-search="true">
 
     <thead>
@@ -44,7 +134,7 @@
 
   </table>
 
-</div>
+</div> --}}
 
 
 <br>
@@ -126,6 +216,10 @@
 </form>
 
 <script type="text/javascript">
+
+  $(document).ready(function () {
+    $('#example').DataTable();
+  });
 
   $(".delplan").on("click", function (event) {
     var id = $(this).data("planid");
