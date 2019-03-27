@@ -45,6 +45,16 @@ app.get("/", function(req, res) {
   });
 });
 
+app.get("/create", function(req, res) {
+  connection.query("SELECT * FROM deliveryOrder;", function(err, data) {
+    if (err) {
+      return res.status(500).end();
+    }
+
+    res.render("create", { deliveryOrder: data });
+  });
+});
+
 // Create a new todo
 app.post("/todos", function(req, res) {
   connection.query("INSERT INTO deliveryOrder (BL, Terminal_Name, Container_No, Vassel_No, ETA, Weight, Seal_No, Delivery_Location, Status_, Return_, Close_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 

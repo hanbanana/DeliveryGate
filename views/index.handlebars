@@ -1,8 +1,6 @@
-
-
 <div style="margin-left: 200px; margin-right: 200px">
-  <table class="table table-sm table-hover" data-toggle="table"  data-search="true">
-    
+  <table class="table table-sm table-hover" data-toggle="table" data-search="true">
+
     <thead>
       <tr>
         <th scope="col" data-sortable="true">ID#</th>
@@ -23,7 +21,7 @@
 
       </tr>
     </thead>
-    
+
     <tbody>
       {{#each deliveryOrder}}
       <tr>
@@ -39,13 +37,11 @@
         <td>{{this.Status_}}</td>
         <td>{{this.Return_}}</td>
         <td>{{this.Close_}}</td>
-        <td><button data-planid="{{this.id}}" class="delplan">Delete</button></td>
-{{/each}}
-
+        <td><button data-planid="{{this.id}}" class="delplan">Delete Plan!</button></td>
       </tr>
-
+      {{/each}}
     </tbody>
-    
+
   </table>
 
 </div>
@@ -153,7 +149,7 @@
     var newPlan = {
       BL: $("#BL").val().trim(),
       Terminal_Name: $("#Terminal_Name").val().trim(),
-      Container_No: $("#Container_No").val().trim(),      
+      Container_No: $("#Container_No").val().trim(),
       Vassel_No: $("#Vassel_No").val().trim(),
       ETA: $("#ETA").val().trim(),
       Weight: $("#Weight").val().trim(),
