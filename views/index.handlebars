@@ -1,9 +1,29 @@
+<div style="margin-left: 200px; margin-right: 200px">
+  <div class="indexNav">
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/create">Create New</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
 <div class="container body-content">
   <div class="page-header">
-    <label class="heading">History</label>
+    <label class="heading">Delivery Order History</label>
     <div class="form-group">
       <fieldset>
-        <form action="" class="form-group" method="post">
+        <form action="" class="form-group">
 
 
           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -22,6 +42,7 @@
                 <th scope="col">Return</th>
                 <th scope="col">Close</th>
                 <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
               </tr>
             </thead>
 
@@ -41,6 +62,7 @@
                 <td>{{this.Return_}}</td>
                 <td>{{this.Close_}}</td>
                 <td><button data-planid="{{this.id}}" class="delplan">Delete</button></td>
+                <td><a href="/{{this.id}}">Edit</a></td>
               </tr>
               {{/each}}
             </tbody>
@@ -140,7 +162,7 @@
 <br>
 <h1>Delivery Order</h1>
 
-<ul>
+{{!-- <ul>
   {{#each deliveryOrder}}
   <li>
     <p>
@@ -150,7 +172,7 @@
     </p>
   </li>
   {{/each}}
-</ul>
+</ul> --}}
 
 <h2>Create a Plan</h2>
 <form id="createplan" class="button-size">
@@ -274,7 +296,17 @@
     var id = $("[name=id]").val().trim();
 
     var updatedPlan = {
-      plan: $("#updateplan [name=BL]").val().trim()
+      BL: $("#BL").val().trim(),
+      Terminal_Name: $("#Terminal_Name").val().trim(),
+      Container_No: $("#Container_No").val().trim(),
+      Vassel_No: $("#Vassel_No").val().trim(),
+      ETA: $("#ETA").val().trim(),
+      Weight: $("#Weight").val().trim(),
+      Seal_No: $("#Seal_No").val().trim(),
+      Delivery_Location: $("#Delivery_Location").val().trim(),
+      Status_: $("#Status_").val().trim(),
+      Return_: $("#Return_").val().trim(),
+      Close_: $("#Close_").val().trim()
     };
 
     // Send the PUT request.
