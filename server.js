@@ -55,7 +55,7 @@ app.get("/create", function (req, res) {
   });
 });
 
-app.get("/:id", function (req, res) {
+app.get("/order/:id", function (req, res) {
   connection.query("SELECT * FROM deliveryOrder where id = ?", [req.params.id], function (err, data) {
     if (err) {
       return res.status(500).end();
@@ -73,6 +73,16 @@ app.get("/customer", function (req, res) {
     }
 
     res.render("customer", { deliveryOrder: data });
+  });
+});
+
+app.get("/contact", function (req, res) {
+  connection.query("SELECT * FROM deliveryOrder;", function (err, data) {
+    if (err) {
+      return res.status(500).end();
+    }
+
+    res.render("contact", { deliveryOrder: data });
   });
 });
 
