@@ -11,11 +11,11 @@ Forward Support is a internal delivery order system. The core concept is a simpl
 
 
 ### Screenshot
-#### Main Page
+* Main Page
 ![Initial Customer](./views/images/delivery-order-main-page.PNG)
 
-#### Create Page
+* Create Page
 ![Initial Customer](./views/images/delivery-order-createOrder-page.PNG)
 
-#### Create Page
+* Edit Page
 ![Initial Customer](./views/images/delivery-order-customerView-page.PNG)
