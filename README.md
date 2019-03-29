@@ -11,4 +11,4 @@ Forward Support is a internal delivery order system. The core concept is a simpl
 
 
 ### Screenshot
-![Delivery Order Screenshot](https://github.com/hanbanana/DeliveryGate/blob/master/views/images/delivery-order-createOrder-page.png)
+![Initial Customer](./views/images/delivery-order-createOrder-page.png)
