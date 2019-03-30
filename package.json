@@ -1,7 +1,7 @@
 {
   "name": "hrx_gate",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000D\u0000e\u0000l\u0000i\u0000v\u0000e\u0000r\u0000y\u0000G\u0000a\u0000t\u0000e\u0000\r\u0000 \u0000",
+  "description": "Forward Support is a internal delivery order system. The core concept is a simple application that can quickly add delivery information.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,13 +18,9 @@
   },
   "homepage": "https://github.com/hanbanana/DeliveryGate#readme",
   "dependencies": {
-    "async": "^2.6.2",
     "body-parser": "^1.18.3",
-    "bootstrap-table": "^1.14.2",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
-    "mssql": "^5.0.5",
-    "mysql": "^2.16.0",
-    "tedious": "^6.1.0"
+    "mysql": "^2.16.0"
   }
 }
