@@ -16,47 +16,52 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var mysql = require("mysql");
+var sql = require("mssql");
 
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "hrx_delivery"
-});
+// config for your database
+var config = {
+  user: 'sa',
+  password: '##PowerEdge',
+  server: 'gpt-db3',
+  database: 'TransNet'
+};
 
-connection.connect(function (err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
+app.get('/', function (req, res) {
 
-  console.log("connected as id " + connection.threadId);
-});
+  // connect to your database
+  sql.connect(config, function (err) {
 
-// Use Handlebars to render the main index.html page with the todos in it.
-app.get("/", function (req, res) {
-  connection.query("SELECT * FROM deliveryOrder;", function (err, data) {
-    if (err) {
-      return res.status(500).end();
-    }
+    if (err) console.log(err);
 
-    res.render("index", { deliveryOrder: data });
+    // create Request object
+    var request = new sql.Request();
+
+    // query to the database and get the records
+    request.query('select * from HrxGateDeliveryOrder', function (err, recordset) {
+
+      if (err) console.log(err)
+
+      // send records as a response
+      res.render("index", { HrxGateDeliveryOrder: recordset });
+      // res.send(data)
+      sql.close();
+
+    });
   });
 });
 
 app.get("/create", function (req, res) {
-  connection.query("SELECT * FROM deliveryOrder;", function (err, data) {
+  request.query("SELECT * FROM HrxGateDeliveryOrder;", function (err, data) {
     if (err) {
       return res.status(500).end();
     }
 
-    res.render("create", { deliveryOrder: data });
+    res.render("create", { HrxGateDeliveryOrder: data });
   });
 });
 
 app.get("/order/:id", function (req, res) {
-  connection.query("SELECT * FROM deliveryOrder where id = ?", [req.params.id], function (err, data) {
+  request.query("SELECT * FROM HrxGateDeliveryOrder where id = ?", [req.params.id], function (err, data) {
     if (err) {
       return res.status(500).end();
     }
@@ -66,29 +71,39 @@ app.get("/order/:id", function (req, res) {
   });
 });
 
-app.get("/customer", function (req, res) {
-  connection.query("SELECT * FROM deliveryOrder;", function (err, data) {
-    if (err) {
-      return res.status(500).end();
-    }
+app.get('/customer', function (req, res) {
 
-    res.render("customer", { deliveryOrder: data });
+  // connect to your database
+  sql.connect(config, function (err) {
+
+    if (err) console.log(err);
+
+    // create Request object
+    var request = new sql.Request();
+
+    // query to the database and get the records
+    request.query('select * from HrxGateDeliveryOrder', function (err, data) {
+
+      if (err) console.log(err)
+
+      // send records as a response
+      res.render("customer", { HrxGateDeliveryOrder: data });
+      // res.send(data)
+      sql.close();
+
+    });
   });
 });
 
 app.get("/contact", function (req, res) {
-  connection.query("SELECT * FROM deliveryOrder;", function (err, data) {
-    if (err) {
-      return res.status(500).end();
-    }
 
-    res.render("contact", { deliveryOrder: data });
-  });
+    res.render("contact");
+  
 });
 
 // Create a new todo
 app.post("/todos", function (req, res) {
-  connection.query("INSERT INTO deliveryOrder (BL, Terminal_Name, Container_No, Vassel_No, ETA, Weight, Seal_No, Delivery_Location, Status_, Return_, Close_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+  request.query("INSERT INTO HrxGateDeliveryOrder (BL, Terminal_Name, Container_No, Vassel_No, ETA, Weight, Seal_No, Delivery_Location, Status_, Return_, Close_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [req.body.BL, req.body.Terminal_Name, req.body.Container_No, req.body.Vassel_No, req.body.ETA, req.body.Weight, req.body.Seal_No, req.body.Delivery_Location, req.body.Status_, req.body.Return_, req.body.Close_], function (err, result) {
       if (err) {
         return res.status(500).end();
@@ -102,7 +117,7 @@ app.post("/todos", function (req, res) {
 
 // Retrieve all todos
 app.get("/todos", function (req, res) {
-  connection.query("SELECT * FROM deliveryOrder;", function (err, data) {
+  request.query("SELECT * FROM HrxGateDeliveryOrder;", function (err, data) {
     if (err) {
       return res.status(500).end();
     }
@@ -113,7 +128,7 @@ app.get("/todos", function (req, res) {
 
 // Update a todo
 app.put("/todos/:id", function (req, res) {
-  connection.query("UPDATE deliveryOrder SET BL = ?, Terminal_Name = ?, Container_No = ?, Vassel_No = ?, ETA = ?, Weight = ?, Seal_No = ?, Delivery_Location = ?, Status_ = ?, Return_ = ?, Close_ = ? WHERE id = ?",
+  request.query("UPDATE HrxGateDeliveryOrder SET BL = ?, Terminal_Name = ?, Container_No = ?, Vassel_No = ?, ETA = ?, Weight = ?, Seal_No = ?, Delivery_Location = ?, Status_ = ?, Return_ = ?, Close_ = ? WHERE id = ?",
   [req.body.BL, req.body.Terminal_Name, req.body.Container_No, req.body.Vassel_No, req.body.ETA, req.body.Weight, req.body.Seal_No, req.body.Delivery_Location, req.body.Status_, req.body.Return_, req.body.Close_, req.params.id],
     function (err, result) {
       if (err) {
@@ -131,7 +146,7 @@ app.put("/todos/:id", function (req, res) {
 
 // Delete a todo
 app.delete("/todos/:id", function (req, res) {
-  connection.query("DELETE FROM deliveryOrder WHERE id = ?", [req.params.id], function (err, result) {
+  request.query("DELETE FROM HrxGateDeliveryOrder WHERE id = ?", [req.params.id], function (err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();
